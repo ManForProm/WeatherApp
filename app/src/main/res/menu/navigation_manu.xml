@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/ic_today_sunny"
+        android:icon="@drawable/ic_today_sunny_24"
+        android:title="Today"/>
+    <item
+        android:id="@+id/ic_forecast_cloud"
+        android:icon="@drawable/ic_forecast_cloud_24"
+        android:title="Forecast"/>
+</menu>
