@@ -7,7 +7,9 @@ import com.example.weatherapp.R
 import com.example.weatherapp.ui.fragments.ForecastFragment
 import com.example.weatherapp.ui.fragments.TodayFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {

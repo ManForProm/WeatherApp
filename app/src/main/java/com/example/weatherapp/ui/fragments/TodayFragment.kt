@@ -6,17 +6,17 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.weatherapp.R
-import com.example.weatherapp.data.OpenWeatherApiService
-import com.example.weatherapp.data.network.response.CurrentWeatherResponse
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
-import io.reactivex.rxjava3.disposables.CompositeDisposable
-import io.reactivex.rxjava3.disposables.Disposable
-import io.reactivex.rxjava3.schedulers.Schedulers
+import com.example.weatherapp.today.TodayContract
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_today.*
+import javax.inject.Inject
 
-class TodayFragment : Fragment() {
+@AndroidEntryPoint
+class TodayFragment : Fragment(),TodayContract.View {
 
-    private  val compositeDisposable = CompositeDisposable()
+    @Inject
+    lateinit var presenter: TodayContract.Presenter
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,26 +26,15 @@ class TodayFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        val apiService = OpenWeatherApiService()
 
-        compositeDisposable += apiService.getCurrentWeather("Vitebsk")
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribeOn(Schedulers.io())
-            .subscribe({response -> onResponse(response)},{t -> onFailure(t) })
+        presenter.onViewCreated()
         return inflater.inflate(R.layout.fragment_today, container, false)
-    }
-    operator fun CompositeDisposable.plusAssign(disposable: Disposable){
-        this.add(disposable)
-    }
-    private fun onFailure(t: Throwable) {
-        justTextview.setText(t.message)
-    }
-    private fun onResponse(response: CurrentWeatherResponse){
-        justTextview.setText(response.toString())
     }
     override fun onDestroy() {
         super.onDestroy()
-        //compositeDisposable.dispose()
+    }
+
+    override fun showCurrentWeather(weather:String) {
+     justTextview.setText(weather)
     }
 }
