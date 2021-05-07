@@ -8,6 +8,7 @@ import io.reactivex.rxjava3.disposables.Disposable
 import io.reactivex.rxjava3.schedulers.Schedulers
 import javax.inject.Inject
 
+
 class TodayPresenter @Inject constructor(
     private val view: TodayContract.View,
     private val repository: Repository
@@ -16,6 +17,7 @@ class TodayPresenter @Inject constructor(
 
     private  val compositeDisposable = CompositeDisposable()
 
+
     override fun onViewCreated() {
         getCurrentWeather()
     }
@@ -23,15 +25,25 @@ class TodayPresenter @Inject constructor(
         compositeDisposable += repository.getCurrentWeather()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({response -> onResponse(response)},{t-> onFailure(t)})
+            .subscribe({ response -> onResponse(response) }, { t -> onFailure(t) })
+
     }
+    /*un loadCurrentWeather(){
+        compositeDisposable += repository.getCurrentMainFromDB()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({result ->  })
+    }*/
     private fun onResponse(response: CurrentWeatherResponse){
         view.showCurrentWeather(response.toString())
+        repository.upsertCurrentWeather(response)
     }
+
     private fun onFailure(t: Throwable) {
-       view.showCurrentWeather(t.toString())
+       view.showCurrentWeather("$ ${repository.getCurrentWeatherFromDB()} WARNING:$t")
     }
     operator fun CompositeDisposable.plusAssign(disposable: Disposable) {
         this.add(disposable)
     }
+
 }

@@ -8,9 +8,9 @@ import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.components.ActivityComponent
+import dagger.hilt.android.components.FragmentComponent
 
-@InstallIn(ActivityComponent::class)
+@InstallIn(FragmentComponent::class)
 @Module
 abstract class TodayModule{
     @Binds
@@ -21,7 +21,7 @@ abstract class TodayModule{
 }
 
 
-@InstallIn(ActivityComponent::class)
+@InstallIn(FragmentComponent::class)
 @Module
 object TodayFragmentModule {
 

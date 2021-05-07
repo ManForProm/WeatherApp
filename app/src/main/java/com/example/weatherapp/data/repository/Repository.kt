@@ -1,7 +1,5 @@
 package com.example.weatherapp.data.repository
 
-import androidx.lifecycle.LiveData
-import com.example.weatherapp.data.db.entity.Main
 import com.example.weatherapp.data.db.unitlocalized.CurrentWeatherDao
 import com.example.weatherapp.data.network.OpenWeatherApiHelper
 import com.example.weatherapp.data.network.response.CurrentWeatherResponse
@@ -15,13 +13,34 @@ class Repository @Inject constructor(
     private val apiHelper: OpenWeatherApiHelper,
     private val currentWeatherDao: CurrentWeatherDao
 ){
+
     fun getCurrentWeather(): Observable<CurrentWeatherResponse>{
-        return apiHelper.getCurrentWeather("London", API_KEY,"metric",Locale.getDefault().displayLanguage)
+
+        //val checkNetworkConnection: Boolean = isConnected(context)
+
+        return  apiHelper.getCurrentWeather(
+            "London",
+            API_KEY,
+            "metric",
+            Locale.getDefault().displayLanguage
+        )
     }
-    fun upsertCurrentWeather(currentWeatherResponse: CurrentWeatherResponse){
-        currentWeatherDao.upsertCurrentWeather(currentWeatherResponse)
+    /*fun upsertCurrentMain(main: Main){
+        currentWeatherDao.upsertCurrentMain(main)
     }
-    fun getCurrentWeatherFromDB(): LiveData<List<Main>>{
+    fun upsertCurrentWeather(weather: Weather){
+        currentWeatherDao.upsertCurrentWeather(weather)
+    }*/
+    fun upsertCurrentWeather(currentWeather: CurrentWeatherResponse){
+        currentWeatherDao.upsertCurrentWeather(currentWeather)
+    }
+    fun getCurrentWeatherFromDB(): Observable<CurrentWeatherResponse>{
         return currentWeatherDao.getCurrentWeatherDB()
     }
+   /* fun getWeatherFromDB(): Observable<ArrayList<Weather>>{
+        return currentWeatherDao.getWeatherDB()
+    }
+    fun getCurrentMainFromDB():Observable<ArrayList<Main>>{
+        return currentWeatherDao.getCurrentMainDB()
+    }*/
 }

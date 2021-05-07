@@ -5,18 +5,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.example.weatherapp.R
+import com.example.weatherapp.databinding.FragmentTodayBinding
 import com.example.weatherapp.today.TodayContract
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.fragment_today.*
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class TodayFragment : Fragment(),TodayContract.View {
+class TodayFragment @Inject constructor() : Fragment(),TodayContract.View {
 
     @Inject
     lateinit var presenter: TodayContract.Presenter
-
+    lateinit var binding: FragmentTodayBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,15 +25,15 @@ class TodayFragment : Fragment(),TodayContract.View {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
+        binding = FragmentTodayBinding.inflate(layoutInflater)
         presenter.onViewCreated()
-        return inflater.inflate(R.layout.fragment_today, container, false)
+        return binding.root
     }
     override fun onDestroy() {
         super.onDestroy()
     }
 
     override fun showCurrentWeather(weather:String) {
-     justTextview.setText(weather)
+     binding.justTextview.text = weather
     }
 }
