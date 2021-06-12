@@ -31,7 +31,8 @@ fun provideOkHttpClient() =if(BuildConfig.DEBUG) {
         .addInterceptor(interceptor)
         .build()
 }else{
-    OkHttpClient.Builder()
+    OkHttpClient
+        .Builder()
         .build()
 }
 @Provides

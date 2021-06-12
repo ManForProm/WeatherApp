@@ -5,21 +5,17 @@ import com.example.weatherapp.data.db.entity.Wind
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import java.lang.reflect.Type
-import java.util.*
 
 class WindConverter {
     val gson = Gson()
 
     @TypeConverter
-    fun listMainToString(windList: List<Wind?>?):String?{
-        return gson.toJson(windList)
+    fun listMainToString(wind: Wind?):String?{
+        return gson.toJson(wind)
     }
     @TypeConverter
-    fun stringToListMain(dataWind:String?):List<Wind?>?{
-        if (dataWind ==  null){
-            return Collections.emptyList()
-        }
+    fun stringToListMain(dataWind:String?):Wind?{
         val lsitType: Type = object :
-                TypeToken<List<Wind>?>() {}.type
-        return gson.fromJson<List<Wind?>>(dataWind,lsitType)
+                TypeToken<Wind?>() {}.type
+        return gson.fromJson<Wind?>(dataWind,lsitType)
     }}

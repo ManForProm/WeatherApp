@@ -1,7 +1,7 @@
 package com.example.weatherapp.data.db.entity.converters
 
 import androidx.room.TypeConverter
-import com.example.weatherapp.data.db.entity.Weather
+import com.example.weatherapp.data.db.entity.WeatherItem
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import java.lang.reflect.Type
@@ -12,16 +12,16 @@ class WeatherConverter {
     val gson = Gson()
 
     @TypeConverter
-    fun listWeatherToString(weatherList: List<Weather?>?):String?{
+    fun listWeatherToString(weatherList: List<WeatherItem?>?):String?{
         return gson.toJson(weatherList)
     }
     @TypeConverter
-    fun stringToListWeather(dataWeather:String?):List<Weather?>?{
+    fun stringToListWeather(dataWeather:String?):List<WeatherItem?>?{
         if (dataWeather ==  null){
             return Collections.emptyList()
         }
         val lsitType: Type = object :
-            TypeToken<List<Weather>?>() {}.type
-        return gson.fromJson<List<Weather?>>(dataWeather,lsitType)
+            TypeToken<List<WeatherItem>?>() {}.type
+        return gson.fromJson<List<WeatherItem?>>(dataWeather,lsitType)
     }
 }

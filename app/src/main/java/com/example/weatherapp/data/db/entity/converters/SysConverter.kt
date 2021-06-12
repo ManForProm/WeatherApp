@@ -1,22 +1,22 @@
 package com.example.weatherapp.data.db.entity.converters
 
 import androidx.room.TypeConverter
-import com.example.weatherapp.data.db.entity.Main
+import com.example.weatherapp.data.db.entity.Sys
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import java.lang.reflect.Type
 
-class MainConverter {
+class SysConverter {
     val gson = Gson()
 
     @TypeConverter
-    fun mainToString(main: Main?):String?{
-        return gson.toJson(main)
+    fun sysToString(sys: Sys?):String?{
+        return gson.toJson(sys)
     }
     @TypeConverter
-    fun stringToMain(dataMain:String?):Main?{
+    fun stringToSys(dataSys:String?): Sys?{
         val listType: Type = object :
-                TypeToken<Main?>() {}.type
-        return gson.fromJson<Main?>(dataMain,listType)
+            TypeToken<Sys?>() {}.type
+        return gson.fromJson<Sys?>(dataSys,listType)
     }
 }

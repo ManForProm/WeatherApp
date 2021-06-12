@@ -1,26 +1,16 @@
 package com.example.weatherapp.data.db.entity
 
-
-import androidx.room.Embedded
-import androidx.room.Entity
-import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 
-
-const val MAIN_ID = 0
-
-@Entity(tableName = "main")
-data class Main(
-    @SerializedName("feels_like")
-    val feelsLike: Double,
-    val humidity: Int,
-    val pressure: Int,
-    val temp: Double,
-   /* @Embedded(prefix = "weather_")
-    @TypeConverters(WeatherConverter::class)
-    val Weather:ArrayList<Weather>,*/
-    @Embedded(prefix = "wind")
-    val Wind:Wind
-){ @PrimaryKey(autoGenerate = false)
-    var id_main:Int = MAIN_ID
-}
+data class Main(@SerializedName("temp")
+                val temp: Double = 0.0,
+                @SerializedName("temp_min")
+                val tempMin: Double = 0.0,
+                @SerializedName("humidity")
+                val humidity: Int = 0,
+                @SerializedName("pressure")
+                val pressure: Int = 0,
+                @SerializedName("feels_like")
+                val feelsLike: Double = 0.0,
+                @SerializedName("temp_max")
+                val tempMax: Double = 0.0)
