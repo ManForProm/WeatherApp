@@ -25,6 +25,7 @@ class TodayFragment @Inject constructor() : Fragment(),TodayContract.View {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
         binding = FragmentTodayBinding.inflate(layoutInflater)
         presenter.onViewCreated()
         return binding.root
@@ -32,7 +33,6 @@ class TodayFragment @Inject constructor() : Fragment(),TodayContract.View {
     override fun onDestroy() {
         super.onDestroy()
     }
-
     override fun showCurrentWeather(weather:String) {
      binding.justTextview.text = weather
     }
