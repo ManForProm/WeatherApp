@@ -24,7 +24,7 @@
             android:text="Today"
             style="@style/TextAppearance.MaterialComponents.Headline1"
             android:textColor="@color/black"
-            android:textSize="32sp" />
+            android:textSize="30sp" />
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:id="@+id/toolbar_gradient_layout"

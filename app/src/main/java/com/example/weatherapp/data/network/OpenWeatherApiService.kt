@@ -1,6 +1,7 @@
 package com.example.weatherapp.data.network
 
 import com.example.weatherapp.data.network.response.CurrentWeatherResponse
+import com.example.weatherapp.data.network.response.ForecastWeatherResponse
 import io.reactivex.rxjava3.core.Observable
 import retrofit2.http.GET
 import retrofit2.http.Query
@@ -18,4 +19,12 @@ interface OpenWeatherApiService {
         @Query("units") units:String,
         @Query("lang") language:String = "en"
     ):Observable<CurrentWeatherResponse>
+
+    @GET("forecast")
+    fun getForecastWeather(
+        @Query("q") location:String,
+        @Query("appid") key:String,
+        @Query("units") units:String,
+        @Query("lang") language:String = "en"
+    ):Observable<ForecastWeatherResponse>
 }

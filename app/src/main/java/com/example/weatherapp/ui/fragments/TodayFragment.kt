@@ -34,6 +34,5 @@ class TodayFragment @Inject constructor() : Fragment(),TodayContract.View {
         super.onDestroy()
     }
     override fun showCurrentWeather(weather:String) {
-     binding.justTextview.text = weather
     }
 }

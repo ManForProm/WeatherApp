@@ -1,4 +1,4 @@
-package com.example.weatherapp.data.db.entity
+package com.example.weatherapp.data.db.entity.current
 
 import com.google.gson.annotations.SerializedName
 

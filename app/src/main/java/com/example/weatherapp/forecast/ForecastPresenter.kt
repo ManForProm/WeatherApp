@@ -1,4 +1,15 @@
 package com.example.weatherapp.forecast
 
-class ForecastPresenter {
+import com.example.weatherapp.data.repository.Repository
+import com.example.weatherapp.today.TodayContract
+import javax.inject.Inject
+
+class ForecastPresenter @Inject constructor(
+    private val view: TodayContract.View,
+    private val repository: Repository
+):ForecastContract.Presenter{
+    override fun onViewCreated() {
+        repository.getForecastWeather()
+    }
+
 }

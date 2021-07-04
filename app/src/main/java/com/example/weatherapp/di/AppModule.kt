@@ -58,5 +58,6 @@ fun provideForecastDatabase(@ApplicationContext appContext: Context) = ForecastD
 @Provides
 fun provideCurrentWeatherDao(db: ForecastDatabase) = db.currentWeatherDao()
 
-
+@Provides
+fun provideForecastWeatherDao(db: ForecastDatabase) = db.forecastWeatherDao()
 }

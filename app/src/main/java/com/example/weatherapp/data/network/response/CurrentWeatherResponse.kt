@@ -2,7 +2,11 @@ package com.example.weatherapp.data.network.response
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.example.weatherapp.data.db.entity.*
+import com.example.weatherapp.data.db.entity.current.Clouds
+import com.example.weatherapp.data.db.entity.current.Sys
+import com.example.weatherapp.data.db.entity.current.Wind
+import com.example.weatherapp.data.db.entity.forecast.Main
+import com.example.weatherapp.data.db.entity.forecast.WeatherItem
 import com.google.gson.annotations.SerializedName
 const val CURRENT_WEATHER_ID = 0
 

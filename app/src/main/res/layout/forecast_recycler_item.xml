@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_margin="4dp">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/forecast_recycler_image_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:src="@drawable/ic_baseline_nights_stay_24" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="11:00"
+            android:id="@+id/forecast_recycler_time_text_view"
+            android:textSize="17sp"
+            android:layout_toEndOf="@id/forecast_recycler_image_view"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="cloudy"
+            android:id="@+id/forecast_recycler_weather_text_view"
+            android:textSize="13sp"
+            android:layout_toEndOf="@id/forecast_recycler_image_view"
+            android:layout_below="@id/forecast_recycler_time_text_view"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/forecast_temp_text_view"
+            android:layout_alignParentTop="true"
+            android:textSize="30sp"
+            android:text="22"
+            android:layout_alignParentRight="true"/>
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>
