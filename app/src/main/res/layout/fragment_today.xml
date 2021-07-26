@@ -34,7 +34,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/fragment_today_location"
                 android:textSize="25sp"
-                android:text="локация"/>
+                android:text="Vitebsk"/>
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -45,18 +45,18 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="27sp"
-                    android:text="температура"/>
+                    android:text="19"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="27sp"
+                    android:textSize="30sp"
                     android:text="|"/>
                 <TextView
                     android:id="@+id/fragment_today_weather"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="27sp"
-                    android:text="погода"/>
+                    android:text="Clear"/>
             </LinearLayout>
 
 
@@ -89,7 +89,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="влажность" />
+                    android:text="59%" />
             </LinearLayout>
 
             <LinearLayout
@@ -109,7 +109,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="спиды" />
+                    android:text="5" />
             </LinearLayout>
 
             <LinearLayout
@@ -129,7 +129,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="осадки" />
+                    android:text="0mm" />
             </LinearLayout>
 
             <LinearLayout
@@ -149,7 +149,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="стелочка" />
+                    android:text="SE" />
             </LinearLayout>
 
             <LinearLayout
@@ -169,7 +169,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="давление" />
+                    android:text="1011" />
             </LinearLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
 

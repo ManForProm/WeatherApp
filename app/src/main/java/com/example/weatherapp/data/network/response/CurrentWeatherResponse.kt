@@ -5,8 +5,6 @@ import androidx.room.PrimaryKey
 import com.example.weatherapp.data.db.entity.current.Clouds
 import com.example.weatherapp.data.db.entity.current.Sys
 import com.example.weatherapp.data.db.entity.current.Wind
-import com.example.weatherapp.data.db.entity.forecast.Main
-import com.example.weatherapp.data.db.entity.forecast.WeatherItem
 import com.google.gson.annotations.SerializedName
 const val CURRENT_WEATHER_ID = 0
 
@@ -16,17 +14,15 @@ data class CurrentWeatherResponse(@SerializedName("visibility")
                                   @SerializedName("timezone")
                                   val timezone: Int = 0,
                                   @SerializedName("main")
-                                  val main: Main,
+                                  val main: com.example.weatherapp.data.db.entity.current.Main,
                                   @SerializedName("clouds")
                                   val clouds: Clouds,
                                   @SerializedName("sys")
                                   val sys: Sys,
                                   @SerializedName("dt")
                                   val dt: Int = 0,
-                                  @SerializedName("coord")
-                                  val coord: Coord,
                                   @SerializedName("weather")
-                                  val weather: List<WeatherItem>?,
+                                  val weather: List<com.example.weatherapp.data.db.entity.current.WeatherItem>?,
                                   @SerializedName("name")
                                   val name: String = "",
                                   @SerializedName("cod")

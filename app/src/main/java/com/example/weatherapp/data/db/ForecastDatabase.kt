@@ -16,7 +16,8 @@ import com.example.weatherapp.data.network.response.ForecastWeatherResponse
     version = 1,
     exportSchema = false
 )
-@TypeConverters(WeatherConverter::class, MainConverter::class, WindConverter::class, CloudsConverter::class,SysConverter::class,CoordConverter::class)
+@TypeConverters(WeatherConverter::class, MainConverter::class, WindConverter::class,
+    CloudsConverter::class,SysConverter::class,CoordConverter::class, CityConverter::class,ListItemConverter::class)
 abstract class ForecastDatabase: RoomDatabase(){
     abstract fun currentWeatherDao(): CurrentWeatherDao
     abstract fun forecastWeatherDao(): ForecastWeatherDao

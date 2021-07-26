@@ -6,7 +6,7 @@ import com.example.weatherapp.data.db.entity.forecast.City
 import com.example.weatherapp.data.db.entity.forecast.ListItem
 import com.google.gson.annotations.SerializedName
 
-const val FORECAST_WEATHER_ID = 1
+const val FORECAST_WEATHER_ID = 0
 
 @Entity(tableName = "forecast_weather")
 data class ForecastWeatherResponse(@SerializedName("city")

@@ -4,8 +4,6 @@ import com.google.gson.annotations.SerializedName
 
 data class City(@SerializedName("country")
                 val country: String = "",
-                @SerializedName("coord")
-                val coord: Coord,
                 @SerializedName("sunrise")
                 val sunrise: Int = 0,
                 @SerializedName("timezone")

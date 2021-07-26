@@ -17,6 +17,7 @@ class TodayFragment @Inject constructor() : Fragment(),TodayContract.View {
     lateinit var presenter: TodayContract.Presenter
     lateinit var binding: FragmentTodayBinding
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
@@ -28,6 +29,7 @@ class TodayFragment @Inject constructor() : Fragment(),TodayContract.View {
 
         binding = FragmentTodayBinding.inflate(layoutInflater)
         presenter.onViewCreated()
+
         return binding.root
     }
     override fun onDestroy() {
@@ -35,4 +37,6 @@ class TodayFragment @Inject constructor() : Fragment(),TodayContract.View {
     }
     override fun showCurrentWeather(weather:String) {
     }
+
+
 }
