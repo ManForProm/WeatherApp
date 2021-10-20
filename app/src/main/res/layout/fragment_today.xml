@@ -2,6 +2,9 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable name="currentWeather" type="com.example.weatherapp.ui.fragments.CurrentWeatherDataClass" />
+    </data>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -32,9 +35,9 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/fragment_today_location"
+                android:id="@+id/fragment_today_location_text"
                 android:textSize="25sp"
-                android:text="Vitebsk"/>
+                android:text="@{currentWeather.location}"/>
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -45,7 +48,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="27sp"
-                    android:text="19"/>
+                    android:text="@{currentWeather.tempreture}"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -56,7 +59,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="27sp"
-                    android:text="Clear"/>
+                    android:text="@{currentWeather.weather}"/>
             </LinearLayout>
 
 
@@ -87,9 +90,10 @@
                     android:src="@drawable/ic_today_sunny_24" />
 
                 <TextView
+                    android:id="@+id/fragment_today_humidity_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="59%" />
+                    android:text="@{currentWeather.humidity}" />
             </LinearLayout>
 
             <LinearLayout
@@ -109,7 +113,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="5" />
+                    android:text="@{currentWeather.speed}" />
             </LinearLayout>
 
             <LinearLayout
@@ -125,11 +129,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:src="@drawable/ic_today_sunny_24" />
-
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="0mm" />
+                    android:text="da" />
             </LinearLayout>
 
             <LinearLayout
@@ -149,7 +152,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="SE" />
+                    android:text="@{currentWeather.orintation}" />
             </LinearLayout>
 
             <LinearLayout
@@ -169,7 +172,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="1011" />
+                    android:text="@{currentWeather.pressure}" />
             </LinearLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
 

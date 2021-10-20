@@ -7,8 +7,10 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.weatherapp.R
 import com.example.weatherapp.forecast.ForecastContract
+import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
+@AndroidEntryPoint
 class ForecastFragment @Inject constructor() : Fragment(), ForecastContract.View {
 
 

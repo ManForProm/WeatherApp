@@ -36,13 +36,14 @@ fun provideOkHttpClient() =if(BuildConfig.DEBUG) {
         .build()
 }
 @Provides
-fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit = Retrofit.Builder()
+fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit {
+    return Retrofit.Builder()
     .baseUrl("https:/api.openweathermap.org/data/2.5/")
     .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
     .addConverterFactory(GsonConverterFactory.create())
     .client(okHttpClient)
     .build()
-
+}
 @Provides
 fun provideGson(): Gson = GsonBuilder().create()
 
@@ -60,4 +61,6 @@ fun provideCurrentWeatherDao(db: ForecastDatabase) = db.currentWeatherDao()
 
 @Provides
 fun provideForecastWeatherDao(db: ForecastDatabase) = db.forecastWeatherDao()
+
+
 }

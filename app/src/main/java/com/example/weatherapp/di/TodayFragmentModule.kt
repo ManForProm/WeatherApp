@@ -30,4 +30,5 @@ fun bindTodayFragment(fragment:Fragment):TodayFragment{
     return fragment as TodayFragment
 }
 
+
 }

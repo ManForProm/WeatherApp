@@ -2,8 +2,8 @@ package com.example.weatherapp.data.network.response
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.example.weatherapp.data.db.entity.forecast.City
-import com.example.weatherapp.data.db.entity.forecast.ListItem
+import com.example.weatherapp.data.network.response.forecast.City
+import com.example.weatherapp.data.network.response.forecast.ListItem
 import com.google.gson.annotations.SerializedName
 
 const val FORECAST_WEATHER_ID = 0

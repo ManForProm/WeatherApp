@@ -1,8 +1,11 @@
-package com.example.weatherapp.data.db.entity.current
+package com.example.weatherapp.data.network.response.current
 
+import androidx.room.Entity
 import com.google.gson.annotations.SerializedName
 
-data class Main(@SerializedName("temp")
+@Entity(tableName = "Main")
+data class Main(
+                @SerializedName("temp")
                 val temp: Double = 0.0,
                 @SerializedName("temp_min")
                 val tempMin: Double = 0.0,

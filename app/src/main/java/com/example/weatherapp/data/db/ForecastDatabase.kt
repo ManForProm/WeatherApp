@@ -6,14 +6,14 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.example.weatherapp.data.db.entity.converters.*
+import com.example.weatherapp.data.db.entity.current.CurrentWeatherEntity
 import com.example.weatherapp.data.db.unitlocalized.CurrentWeatherDao
 import com.example.weatherapp.data.db.unitlocalized.ForecastWeatherDao
-import com.example.weatherapp.data.network.response.CurrentWeatherResponse
 import com.example.weatherapp.data.network.response.ForecastWeatherResponse
 
     @Database(
-    entities = [ ForecastWeatherResponse::class,CurrentWeatherResponse::class],
-    version = 1,
+    entities = [ ForecastWeatherResponse::class,CurrentWeatherEntity::class],
+    version = 3,
     exportSchema = false
 )
 @TypeConverters(WeatherConverter::class, MainConverter::class, WindConverter::class,
@@ -32,7 +32,9 @@ abstract class ForecastDatabase: RoomDatabase(){
         }
         private fun buildDatabase(context: Context) =
             Room.databaseBuilder(context.applicationContext,
-                ForecastDatabase::class.java, "forecast.db").build()
+                ForecastDatabase::class.java, "forecast.db")
+                .fallbackToDestructiveMigration()
+                .build()
     }
 
 }

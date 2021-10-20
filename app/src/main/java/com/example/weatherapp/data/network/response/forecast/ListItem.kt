@@ -1,4 +1,4 @@
-package com.example.weatherapp.data.db.entity.forecast
+package com.example.weatherapp.data.network.response.forecast
 
 import androidx.room.TypeConverters
 import com.example.weatherapp.data.db.entity.converters.MainConverter
