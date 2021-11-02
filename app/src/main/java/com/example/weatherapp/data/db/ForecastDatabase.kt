@@ -13,7 +13,7 @@ import com.example.weatherapp.data.network.response.ForecastWeatherResponse
 
     @Database(
     entities = [ ForecastWeatherResponse::class,CurrentWeatherEntity::class],
-    version = 3,
+    version = 4,
     exportSchema = false
 )
 @TypeConverters(WeatherConverter::class, MainConverter::class, WindConverter::class,

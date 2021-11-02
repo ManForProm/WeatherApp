@@ -37,10 +37,23 @@ class TodayFragment @Inject constructor() : Fragment(),TodayContract.View {
         return binding.root
     }
 
+    override fun onResume() {
+        super.onResume()
+
+        presenter.onResume()
+
+
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         presenter.onViewCreated()
+
+
+
+
+        binding.textToday = text
 
         val tv: TextView = view.findViewById(R.id.fragment_today_location_text)
         tv.setText(text)
@@ -55,18 +68,23 @@ class TodayFragment @Inject constructor() : Fragment(),TodayContract.View {
                                      tempreture: String,
                                      weather: String?,
                                      humidity: String ,
-//                                     precipitation: Int ,
+                                     precipitation: String ,
                                      pressure: String ,
                                      speed: String ,
-                                     orintation: String
+                                     orintation: String,
+                                     iconId: String?
     ) {
 
-        binding.currentWeather = CurrentWeatherDataClass(location = location
-            , tempreture = tempreture
-            , weather = weather
-            , humidity = humidity,
-//        precipitation = precipitation
-             pressure = pressure, speed = speed, orintation = orintation)
+        binding.currentWeather = CurrentWeatherDataClass(location = location,
+            tempreture = tempreture,
+            weather = weather,
+            humidity = humidity,
+            precipitation = precipitation,
+            pressure = pressure,
+            speed = speed,
+            orintation = orintation,
+            iconId = iconId
+        )
     }
 }
 
@@ -75,8 +93,9 @@ class TodayFragment @Inject constructor() : Fragment(),TodayContract.View {
             val tempreture: String = "",
             val weather: String? = "",
             val humidity: String = "",
-//            val precipitation: Int = 0,
+            val precipitation: String = "",
             val pressure: String = "",
             val speed: String = "",
-            val orintation: String = ""
+            val orintation: String = "",
+            val iconId: String? = ""
     ){}

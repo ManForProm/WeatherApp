@@ -23,7 +23,8 @@ class RepositoryForecast @Inject constructor(
     fun getForecastWeatherApi(): Observable<ForecastWeatherResponse> {
 
         return  apiHelper.getForecastWeather(
-            "Vitebsk",
+            1,
+            1,
             API_KEY,
             "metric",
             Locale.getDefault().displayLanguage

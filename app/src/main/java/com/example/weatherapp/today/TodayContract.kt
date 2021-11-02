@@ -6,14 +6,16 @@ interface TodayContract {
                                tempreture: String,
                                weather: String?,
                                humidity: String ,
-//                               precipitation: Int ,
+                               precipitation: String ,
                                pressure: String ,
                                speed: String ,
-                               orintation: String
-                                  )
+                               orintation: String,
+                               iconId:String?
+        )
     }
     interface Presenter{
         fun onViewCreated()
         fun onCreateView()
+        fun onResume()
     }
 }

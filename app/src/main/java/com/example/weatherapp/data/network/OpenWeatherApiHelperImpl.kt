@@ -9,16 +9,18 @@ class OpenWeatherApiHelperImpl @Inject constructor(
     private val apiService: OpenWeatherApiService
 ):OpenWeatherApiHelper {
     override fun getCurrentWeather(
-        location: String,
+        lat: Double,
+        lon: Double,
         key: String,
         units: String,
         language: String
-    ): Observable<CurrentWeatherResponse> = apiService.getCurrentWeather(location,key,units,language)
+    ): Observable<CurrentWeatherResponse> = apiService.getCurrentWeather(lat,lon,key,units,language)
 
     override fun getForecastWeather(
-        location:String,
+        lat: Int,
+        lon: Int,
         key:String,
         units:String,
         language:String
-    ):Observable<ForecastWeatherResponse> = apiService.getForecastWeather(location,key,units,language)
+    ):Observable<ForecastWeatherResponse> = apiService.getForecastWeather(lat,lon,key,units,language)
 }

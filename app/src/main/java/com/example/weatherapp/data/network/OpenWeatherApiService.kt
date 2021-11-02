@@ -14,7 +14,8 @@ interface OpenWeatherApiService {
 
     @GET("weather")
     fun getCurrentWeather(
-        @Query("q") location:String,
+        @Query("lat") lat:Double,
+        @Query("lon") lon:Double,
         @Query("appid") key:String,
         @Query("units") units:String,
         @Query("lang") language:String = "en"
@@ -22,7 +23,8 @@ interface OpenWeatherApiService {
 
     @GET("forecast")
     fun getForecastWeather(
-        @Query("q") location:String,
+        @Query("lat") lat:Int,
+        @Query("lon") lon:Int,
         @Query("appid") key:String,
         @Query("units") units:String,
         @Query("lang") language:String = "en"

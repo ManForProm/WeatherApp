@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools">
     <data>
         <variable name="currentWeather" type="com.example.weatherapp.ui.fragments.CurrentWeatherDataClass" />
-        <variable
-            name="textToday"
-            type="String" />
     </data>
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -16,7 +16,6 @@
         app:layout_constraintEnd_toStartOf="@+id/fragment_today_linear_weather"
         app:layout_constraintStart_toStartOf="@+id/fragment_today_linear_weather"
         tools:context=".ui.fragments.TodayFragment">
-
         <!-- TODO: Update blank fragment layout -->
         <LinearLayout
             android:id="@+id/fragment_today_linear_weather"
@@ -33,8 +32,7 @@
                 android:id="@+id/weather_image_view"
                 android:layout_width="150dp"
                 android:layout_height="150dp"
-                app:iconId="@{currentWeather.iconId}"
-                />
+                app:iconId="@{currentWeather.iconId}" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -62,7 +60,7 @@
                     android:id="@+id/fragment_today_weather"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="30sp"
+                    android:textSize="27sp"
                     android:text="@{currentWeather.weather}"/>
             </LinearLayout>
 
@@ -200,4 +198,5 @@
                 android:text="Share"/>
         </FrameLayout>
     </LinearLayout>
+    </ScrollView>
 </layout>

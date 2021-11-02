@@ -6,14 +6,16 @@ import io.reactivex.rxjava3.core.Observable
 
 interface OpenWeatherApiHelper {
     fun getCurrentWeather(
-        location:String,
+        lat: Double,
+        lon: Double,
         key:String,
         units:String,
         language:String
     ): Observable<CurrentWeatherResponse>
 
     fun getForecastWeather(
-        location:String,
+        lat: Int,
+        lon: Int,
         key:String,
         units:String,
         language:String

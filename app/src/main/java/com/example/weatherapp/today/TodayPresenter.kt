@@ -23,9 +23,13 @@ class TodayPresenter @Inject constructor(
     }
 
     override fun onViewCreated() {
+
+
+    }
+
+    override fun onResume() {
         repository.getCurrentWeather()
         loadCurrentWeather()
-
     }
 
     fun loadCurrentWeather(){
@@ -45,12 +49,18 @@ class TodayPresenter @Inject constructor(
     }
 
     fun setCurrentData(response: CurrentWeatherEntity){
-        response.apply {  view.showCurrentWeather(name
-            ,main.temp.toInt().toString(),
-            response.weather?.get(1)?.let { it.description },
+        Log.d(TAG,"Setting current data : $response")
+        response.apply {  view.showCurrentWeather(name,
+            main.temp.toInt().toString(),
+            response.weather?.get(0)?.let { it.description },
             main.humidity.toString(),
-            main.pressure.toString(),wind.speed.toInt().toString(),setWindOrintation(response.wind.deg)
+            "15",
+            main.pressure.toString(),
+            wind.speed.toInt().toString(),
+            setWindOrintation(response.wind.deg),
+            response.weather?.get(0)?.let { it.icon }
         )
+            Log.d(TAG,"Current data sets")
         }
     }
 
@@ -69,6 +79,8 @@ class TodayPresenter @Inject constructor(
 
         }
     }
+
+
 }
 
 

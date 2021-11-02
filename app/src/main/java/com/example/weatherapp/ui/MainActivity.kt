@@ -17,7 +17,7 @@ import kotlinx.android.synthetic.main.toolbar.*
 
 
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity() {
+class MainActivity() : AppCompatActivity() {
     var PERMISSION_ID = 10
 
     override fun onCreate(savedInstanceState: Bundle?) {
