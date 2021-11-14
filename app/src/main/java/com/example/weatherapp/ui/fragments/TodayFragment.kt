@@ -1,5 +1,6 @@
 package com.example.weatherapp.ui.fragments
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -30,9 +31,12 @@ class TodayFragment @Inject constructor() : Fragment(),TodayContract.View {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        presenter.onCreateView()
 
         binding = FragmentTodayBinding.inflate(layoutInflater)
+
+        binding.shareButton.setOnClickListener {
+            presenter.onClickShare()
+        }
 
         return binding.root
     }
@@ -43,6 +47,10 @@ class TodayFragment @Inject constructor() : Fragment(),TodayContract.View {
         presenter.onResume()
 
 
+    }
+
+    override fun shareCurrentData(intent: Intent) {
+            startActivity(intent)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

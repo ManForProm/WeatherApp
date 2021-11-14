@@ -7,12 +7,12 @@ import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.example.weatherapp.data.db.entity.converters.*
 import com.example.weatherapp.data.db.entity.current.CurrentWeatherEntity
+import com.example.weatherapp.data.db.entity.forecast.ForecastWeatherEntity
 import com.example.weatherapp.data.db.unitlocalized.CurrentWeatherDao
 import com.example.weatherapp.data.db.unitlocalized.ForecastWeatherDao
-import com.example.weatherapp.data.network.response.ForecastWeatherResponse
 
     @Database(
-    entities = [ ForecastWeatherResponse::class,CurrentWeatherEntity::class],
+    entities = [ ForecastWeatherEntity::class,CurrentWeatherEntity::class],
     version = 4,
     exportSchema = false
 )

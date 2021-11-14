@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.appcompat.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:id="@+id/toolbar"
@@ -24,7 +23,7 @@
             android:text="Today"
             style="@style/TextAppearance.MaterialComponents.Headline1"
             android:textColor="@color/black"
-            android:textSize="30sp" />
+            android:textSize="34sp" />
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:id="@+id/toolbar_gradient_layout"

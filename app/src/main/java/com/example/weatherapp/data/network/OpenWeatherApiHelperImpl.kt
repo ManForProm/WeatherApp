@@ -17,8 +17,8 @@ class OpenWeatherApiHelperImpl @Inject constructor(
     ): Observable<CurrentWeatherResponse> = apiService.getCurrentWeather(lat,lon,key,units,language)
 
     override fun getForecastWeather(
-        lat: Int,
-        lon: Int,
+        lat: Double,
+        lon: Double,
         key:String,
         units:String,
         language:String

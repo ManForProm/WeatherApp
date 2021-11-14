@@ -14,8 +14,8 @@ interface OpenWeatherApiHelper {
     ): Observable<CurrentWeatherResponse>
 
     fun getForecastWeather(
-        lat: Int,
-        lon: Int,
+        lat: Double,
+        lon: Double,
         key:String,
         units:String,
         language:String

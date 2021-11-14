@@ -1,6 +1,7 @@
 package com.example.weatherapp.ui
 
 import android.content.pm.PackageManager
+import android.content.res.Configuration
 import android.graphics.drawable.AnimationDrawable
 import android.os.Bundle
 import android.util.Log
@@ -20,13 +21,16 @@ import kotlinx.android.synthetic.main.toolbar.*
 class MainActivity() : AppCompatActivity() {
     var PERMISSION_ID = 10
 
+    private var currentFragment: Int = 0
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val forecastFragment = ForecastFragment()
-        val todayFragment = TodayFragment()
-        val bottomNavigation : BottomNavigationView = findViewById(R.id.bottom_nav)
+         val forecastFragment = ForecastFragment()
+         val todayFragment = TodayFragment()
+         val bottomNavigation : BottomNavigationView = findViewById(R.id.bottom_nav)
 
         ActivityResultContracts.RequestPermission()
 
@@ -41,13 +45,23 @@ class MainActivity() : AppCompatActivity() {
         bottomNavigation.setOnNavigationItemSelectedListener {
             when(it.itemId){
                 R.id.ic_today_sunny -> {makeCurrentFragment(todayFragment)
+                    currentFragment = 0
                 toolbar_text.setText("Today")}
                 R.id.ic_forecast_cloud -> {makeCurrentFragment(forecastFragment)
+                    currentFragment = 1
                 toolbar_text.setText("Forecast")}
             }
             true
         }
 
+    }
+
+    override fun onConfigurationChanged(newConfig: Configuration) {
+        super.onConfigurationChanged(newConfig)
+        when(currentFragment){
+            0 -> makeCurrentFragment(TodayFragment())
+            1 -> makeCurrentFragment(ForecastFragment())
+        }
     }
 
     fun RequestPermission() {
@@ -71,6 +85,7 @@ class MainActivity() : AppCompatActivity() {
             if(grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED){
                 Log.d("Debug", "You have permission")
             }
+            else finish()
         }
     }
     private fun makeCurrentFragment(fragment: Fragment){
@@ -79,6 +94,15 @@ class MainActivity() : AppCompatActivity() {
             commit()
         }
     }
+
+//    override fun onSaveInstanceState(outState: Bundle, outPersistentState: PersistableBundle) {
+//        super.onSaveInstanceState(outState, outPersistentState)
+//        outState.putInt("LastTab", when(currentFragment){
+//            0 -> 0
+//            1 -> 1
+//            else -> 0
+//        })
+//    }
 
     private fun startGradient(){
         val animationDrawable = toolbar_gradient_layout.background as AnimationDrawable

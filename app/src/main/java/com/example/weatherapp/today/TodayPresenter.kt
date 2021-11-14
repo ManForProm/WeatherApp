@@ -1,5 +1,6 @@
 package com.example.weatherapp.today
 
+import android.content.Intent
 import android.util.Log
 import com.example.weatherapp.data.db.entity.current.CurrentWeatherEntity
 import com.example.weatherapp.data.repository.RepositoryCurrent
@@ -16,20 +17,21 @@ class TodayPresenter @Inject constructor(
 
     private val TAG:String = javaClass.simpleName
 
+    private lateinit var currentWeatherResponse: CurrentWeatherEntity
 
-    override fun onCreateView(){
-        repository.getCurrentWeather()
-        loadCurrentWeather()
-    }
 
     override fun onViewCreated() {
-
-
+        repository.getCurrentWeather()
+        loadCurrentWeather()
     }
 
     override fun onResume() {
         repository.getCurrentWeather()
         loadCurrentWeather()
+    }
+
+    override fun onClickShare() {
+        view.shareCurrentData(shareCurrentDataPresenter(currentWeatherResponse))
     }
 
     fun loadCurrentWeather(){
@@ -41,6 +43,7 @@ class TodayPresenter @Inject constructor(
 
     fun onResponseLoadCurrentWeather(response: CurrentWeatherEntity){
         setCurrentData(response)
+        currentWeatherResponse = response
         Log.d(TAG,"onLoad $response ")
     }
 
@@ -52,16 +55,32 @@ class TodayPresenter @Inject constructor(
         Log.d(TAG,"Setting current data : $response")
         response.apply {  view.showCurrentWeather(name,
             main.temp.toInt().toString(),
-            response.weather?.get(0)?.let { it.description },
+            weather?.get(0)?.description,
             main.humidity.toString(),
             "15",
             main.pressure.toString(),
             wind.speed.toInt().toString(),
-            setWindOrintation(response.wind.deg),
-            response.weather?.get(0)?.let { it.icon }
+            setWindOrintation(wind.deg),
+            weather?.get(0)?.icon
         )
             Log.d(TAG,"Current data sets")
         }
+    }
+
+    fun shareCurrentDataPresenter(response: CurrentWeatherEntity):Intent{
+        val sendIntent: Intent = Intent().apply {
+            action = Intent.ACTION_SEND
+            putExtra(Intent.EXTRA_TEXT
+                ,"Location:${response.name} \n" +
+                        "Tempreture:${response.main.temp.toInt()} \n" +
+                        "Weather:${response.weather?.get(0)?.description} \n" +
+                        "Humidity:${response.main.humidity} \n" +
+                        "Speed:${response.wind.speed} \n" +
+                        "Pressure:${response.main.pressure} \n" +
+                        "Wind orintation:${setWindOrintation(response.wind.deg)} \n")
+            type = "text/plain"
+        }
+        return sendIntent
     }
 
     fun setWindOrintation(deg:Int):String {
@@ -79,12 +98,10 @@ class TodayPresenter @Inject constructor(
 
         }
     }
-
-
 }
 
 
-enum class WindOrintation (var direction:String){
+enum class WindOrintation(var direction:String){
     NORTH("North"),
     EAST("East"),
     WEST("West"),
