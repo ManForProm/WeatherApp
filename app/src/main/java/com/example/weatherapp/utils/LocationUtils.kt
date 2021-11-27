@@ -17,43 +17,6 @@ class LocationUtils @Inject constructor(@ApplicationContext private val appConte
     private  var fusedLocationProviderClient: FusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(appContext)
      var locationRequest: LocationRequest? = null
 
-//    fun getLastLocation():Observable<Location>{
-//        return Observable.create { emitter ->
-//
-//            if (ContextCompat.checkSelfPermission(
-//                    appContext,
-//                    android.Manifest.permission.ACCESS_FINE_LOCATION
-//                ) == PackageManager.PERMISSION_GRANTED
-//            ) {
-//                if (CheckLocationPremission(appContext)) {
-//                    if (isLocationEnabled(appContext)) {
-//                         val listener = fusedLocationProviderClient.lastLocation.addOnCompleteListener { task ->
-//                            var location: Location? = task.result
-//                            if (location == null) {
-//                                NewLocationData()
-//                            } else {
-//                                Log.d(
-//                                    "Debug:", "Your Location:" + location.longitude + " " + "," +
-//                                            " Lat: " + location.latitude + "\n" + getCityName(
-//                                        location.latitude,
-//                                        location.longitude
-//                                    )
-//                                )
-//                                emitter.onNext(location)
-//                            }
-//
-//                        }
-//                        emitter.setCancellable { listener.isCanceled  }
-//                    } else {
-//
-//                    }
-//                } else {
-//                    ActivityResultContracts.RequestPermission()
-//                }
-//            }
-//        emitter.onComplete()
-//        }
-//    }
 fun getLastLocation(callback:(Location) -> Unit) {
     if (ContextCompat.checkSelfPermission(
             appContext,
@@ -102,7 +65,7 @@ fun getLastLocation(callback:(Location) -> Unit) {
         var locationRequest: LocationRequest? = null
         locationRequest?.priority = LocationRequest.PRIORITY_HIGH_ACCURACY
         locationRequest?.interval = 0
-        locationRequest?.fastestInterval = 0
+        locationRequest?.fastestInterval = 1
         locationRequest?.numUpdates = 1
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(appContext)
         if (ContextCompat.checkSelfPermission(appContext, android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {

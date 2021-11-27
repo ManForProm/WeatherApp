@@ -90,7 +90,7 @@
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:src="@drawable/ic_today_sunny_24"
+                    android:src="@drawable/ic_humidity"
                     android:contentDescription="TODO" />
 
                 <TextView
@@ -112,7 +112,7 @@
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:src="@drawable/ic_today_sunny_24"
+                    android:src="@drawable/ic_wind_speed"
                     android:contentDescription="TODO" />
 
                 <TextView
@@ -133,7 +133,7 @@
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:src="@drawable/ic_today_sunny_24"
+                    android:src="@drawable/ic_precipitation"
                     android:contentDescription="TODO" />
                 <TextView
                     android:layout_width="wrap_content"
@@ -153,7 +153,7 @@
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:src="@drawable/ic_today_sunny_24"
+                    android:src="@drawable/ic_forecast_orintation"
                     android:contentDescription="TODO" />
 
                 <TextView
@@ -174,7 +174,7 @@
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:src="@drawable/ic_today_sunny_24"
+                    android:src="@drawable/ic_pressure"
                     android:contentDescription="TODO" />
 
                 <TextView

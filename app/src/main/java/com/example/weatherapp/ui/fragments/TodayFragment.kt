@@ -25,6 +25,8 @@ class TodayFragment @Inject constructor() : Fragment(),TodayContract.View {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        presenter.onViewAttach(this, getLifecycle())
+
     }
 
     override fun onCreateView(
@@ -44,8 +46,6 @@ class TodayFragment @Inject constructor() : Fragment(),TodayContract.View {
     override fun onResume() {
         super.onResume()
 
-        presenter.onResume()
-
 
     }
 
@@ -55,11 +55,6 @@ class TodayFragment @Inject constructor() : Fragment(),TodayContract.View {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        presenter.onViewCreated()
-
-
-
 
         binding.textToday = text
 

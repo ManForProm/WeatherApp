@@ -1,6 +1,8 @@
 package com.example.weatherapp.today
 
 import android.content.Intent
+import androidx.lifecycle.Lifecycle
+import com.example.weatherapp.ui.fragments.TodayFragment
 
 interface TodayContract {
     interface View{
@@ -17,8 +19,7 @@ interface TodayContract {
         fun shareCurrentData(intent: Intent)
     }
     interface Presenter{
-        fun onViewCreated()
         fun onClickShare()
-        fun onResume()
+        fun onViewAttach(view: TodayFragment, viewLifecycle: Lifecycle)
     }
 }

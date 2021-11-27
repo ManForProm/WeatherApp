@@ -32,4 +32,5 @@ fun  isConnected(context: Context): Boolean {
             false
         }
     }
-    return hasInternet}
+    return hasInternet
+}
