@@ -20,4 +20,8 @@
         <item name="actionMenuTextColor">@android:color/holo_green_light</item>
         <!-- Tints the input fields like checkboxes and text fields -->
     </style>
+
+    <style name="ThemeOverlay.App.MaterialAlertDialog" parent="ThemeOverlay.MaterialComponents.MaterialAlertDialog">
+        <item name="android:backgroundDimAmount">0.70</item>
+    </style>
 </resources>

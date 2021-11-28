@@ -5,6 +5,9 @@
     <string name="hello_blank_fragment2"> blank fragment 2</string>
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
+
+    <string name="no_internet_connection">No internet connection</string>
+    <string name="no_internet_connection_data">Downloaded data display</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

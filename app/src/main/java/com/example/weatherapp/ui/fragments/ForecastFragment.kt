@@ -7,10 +7,10 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.weatherapp.data.network.response.forecast.ListItem
 import com.example.weatherapp.data.recycler.ForecastRecyclerViewAdapter
 import com.example.weatherapp.databinding.FragmentForecastBinding
 import com.example.weatherapp.forecast.ForecastContract
+import com.example.weatherapp.forecast.ForecastViewData
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -52,7 +52,7 @@ class ForecastFragment @Inject constructor() : Fragment(), ForecastContract.View
 //        })
 //    }
 
-    override fun setRecyclerViewData(list: List<ListItem>?, city:String) {
+    override fun setRecyclerViewData(list: List<ForecastViewData>, city:String) {
 
        // val listFake:List<ListItem>? = listOf(ListItem(dtTxt = "aa",weather = listOf(WeatherItem(icon = "13n",description = "cold")),dt = 0,main = Main(temp = 1.11)))
 

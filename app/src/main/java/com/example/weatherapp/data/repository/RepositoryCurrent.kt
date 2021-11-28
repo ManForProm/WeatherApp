@@ -84,11 +84,27 @@ class RepositoryCurrent @Inject constructor(
 
     }
 
+    fun onCurrentResponse(response: CurrentWeatherResponse){
+        Log.d(TAG,"Get From Api Success")
+        upsertCurrentWeather(response)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({Log.d(TAG,"Complete upserting")},
+                { t -> Log.d(TAG,"Upserting did't happend $t")})
+    }
+
+    fun onFailure(t: Throwable) {
+        Log.d(TAG,"getting API Error: $t")
+
+    }
+
+
     fun loadCurrentWeather(){
         getCurrentWeatherFromDB()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({responseDB -> onResponseLoadCurrentWeather(responseDB)},{t -> onFailureLoadCurrentWeather(t)})
+            .subscribe({responseDB -> onResponseLoadCurrentWeather(responseDB)},
+                {t -> onFailureLoadCurrentWeather(t)})
     }
 
     fun onResponseLoadCurrentWeather(response: CurrentWeatherEntity){
@@ -100,20 +116,6 @@ class RepositoryCurrent @Inject constructor(
 
     fun onFailureLoadCurrentWeather(t: Throwable) {
         Log.d(TAG,"Load exeption: $t")
-    }
-
-
-    fun onCurrentResponse(response: CurrentWeatherResponse){
-        Log.d(TAG,"Get From Api Success")
-        upsertCurrentWeather(response)
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({Log.d(TAG,"Complete upserting")},{ t -> Log.d(TAG,"Upserting did't happend $t")})
-    }
-
-    fun onFailure(t: Throwable) {
-        Log.d(TAG,"getting API Error: $t")
-
     }
     fun getCurrentWeatherFromDB(): Observable<CurrentWeatherEntity>{
         return currentWeatherDao.getCurrentWeatherDB()

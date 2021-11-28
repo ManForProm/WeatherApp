@@ -36,6 +36,11 @@ fun setWindOrintationImage (view: ImageView, direction: String?) {
     }
 }
 
+@BindingAdapter("app:goneUnless")
+fun goneUnless(view: View, visible: Boolean) {
+    view.visibility = if (visible) View.VISIBLE else View.GONE
+}
+
 @BindingAdapter("app:iconId")
 fun loadImage (view: ImageView, iconId: String?) {
 

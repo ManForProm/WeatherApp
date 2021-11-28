@@ -14,6 +14,8 @@ class ForecastPresenter @Inject constructor(
 
     private final val TAG:String = javaClass.simpleName
 
+    private val mapper = ForecastWeatherMapper()
+
     override fun onViewCreated() {
     }
 
@@ -33,7 +35,7 @@ class ForecastPresenter @Inject constructor(
             .subscribe({responseDB -> onResponseLoadCurrentWeather(responseDB)},{t -> onFailureLoadCurrentWeather(t)})
     }
     fun onResponseLoadCurrentWeather(response: ForecastWeatherEntity){
-        view.setRecyclerViewData(response.list, response.city.name)
+        view.setRecyclerViewData(mapper.mapToForecastWeatherViewData(response), response.city.name)
         Log.d(TAG,"onLoad ${response.list?.get(0)} ")
     }
 

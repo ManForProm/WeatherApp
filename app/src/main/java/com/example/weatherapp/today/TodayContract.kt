@@ -16,10 +16,13 @@ interface TodayContract {
                                orintation: String,
                                iconId:String?
         )
+        fun showInternetConnectionAttention(onErrorInternetConnection: Boolean)
+        fun showFirstLaunchInternetConnectionAttention(onErrorInternetConnection: Boolean)
         fun shareCurrentData(intent: Intent)
     }
     interface Presenter{
         fun onClickShare()
+        fun onFirstLaunch()
         fun onViewAttach(view: TodayFragment, viewLifecycle: Lifecycle)
     }
 }

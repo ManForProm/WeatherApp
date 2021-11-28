@@ -1,5 +1,6 @@
 package com.example.weatherapp.today
 
+import android.content.Context
 import android.content.Intent
 import android.util.Log
 import androidx.lifecycle.Lifecycle
@@ -9,10 +10,13 @@ import com.example.weatherapp.base.BasePresenter
 import com.example.weatherapp.data.db.entity.current.CurrentWeatherEntity
 import com.example.weatherapp.data.repository.RepositoryCurrent
 import com.example.weatherapp.ui.fragments.TodayFragment
+import com.example.weatherapp.utils.isConnected
+import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
 
 
 class TodayPresenter @Inject constructor(
+    @ApplicationContext private val appContext: Context,
     private val view: TodayContract.View,
     private val repository: RepositoryCurrent
 
@@ -34,14 +38,22 @@ class TodayPresenter @Inject constructor(
         getLoadCurrentWeather()
     }
 
+    @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
+    private fun onResume() {
+        checkInternetConnection()
+        getLoadCurrentWeather()
+        view()?.viewLifecycleOwner?.let { repository.loadedCurrentWeatherDataBase.observe(it,
+            currentWeatherObserver) }
+    }
+
     override fun onViewAttach(view: TodayFragment, viewLifecycle: Lifecycle) {
         attachView(view,viewLifecycle)
     }
 
-    @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
-    private fun onResume() {
-        view()?.viewLifecycleOwner?.let { repository.loadedCurrentWeatherDataBase.observe(it,
-            currentWeatherObserver) }
+    override fun onFirstLaunch() {
+        if (!isConnected(appContext)){
+            view.showFirstLaunchInternetConnectionAttention(true)
+        }
     }
 
     override fun onClickShare() {
@@ -85,6 +97,14 @@ class TodayPresenter @Inject constructor(
             type = "text/plain"
         }
         return sendIntent
+    }
+
+    fun checkInternetConnection(){
+        if (!isConnected(appContext)){
+            view.showInternetConnectionAttention(true)
+        }
+        else view.showInternetConnectionAttention(false)
+
     }
 
     fun setWindOrintation(deg:Int):String {
