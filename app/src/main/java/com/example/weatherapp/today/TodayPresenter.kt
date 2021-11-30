@@ -1,55 +1,66 @@
 package com.example.weatherapp.today
 
+import android.content.Context
 import android.content.Intent
 import android.util.Log
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.Observer
+import androidx.lifecycle.OnLifecycleEvent
+import com.example.weatherapp.base.BasePresenter
 import com.example.weatherapp.data.db.entity.current.CurrentWeatherEntity
 import com.example.weatherapp.data.repository.RepositoryCurrent
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
-import io.reactivex.rxjava3.schedulers.Schedulers
+import com.example.weatherapp.ui.fragments.TodayFragment
+import com.example.weatherapp.utils.isConnected
+import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
 
 
 class TodayPresenter @Inject constructor(
+    @ApplicationContext private val appContext: Context,
     private val view: TodayContract.View,
     private val repository: RepositoryCurrent
 
-):TodayContract.Presenter {
+):TodayContract.Presenter,BasePresenter<TodayFragment>() {
 
     private val TAG:String = javaClass.simpleName
 
     private lateinit var currentWeatherResponse: CurrentWeatherEntity
 
-
-    override fun onViewCreated() {
-        repository.getCurrentWeather()
-        loadCurrentWeather()
+    val currentWeatherObserver = Observer<CurrentWeatherEntity>{ CurrentWeatherEntity ->
+        currentWeatherResponse = CurrentWeatherEntity
+        setCurrentData(CurrentWeatherEntity)
     }
 
-    override fun onResume() {
-        repository.getCurrentWeather()
-        loadCurrentWeather()
+
+    @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
+    private fun onCreate() {
+        Log.d(TAG,"Getting current data ")
+        getLoadCurrentWeather()
+    }
+
+    @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
+    private fun onResume() {
+        checkInternetConnection()
+        getLoadCurrentWeather()
+        view()?.viewLifecycleOwner?.let { repository.loadedCurrentWeatherDataBase.observe(it,
+            currentWeatherObserver) }
+    }
+
+    override fun onViewAttach(view: TodayFragment, viewLifecycle: Lifecycle) {
+        attachView(view,viewLifecycle)
+    }
+
+    override fun onFirstLaunch() {
+        if (!isConnected(appContext)){
+            view.showFirstLaunchInternetConnectionAttention(true)
+        }
     }
 
     override fun onClickShare() {
         view.shareCurrentData(shareCurrentDataPresenter(currentWeatherResponse))
     }
 
-    fun loadCurrentWeather(){
-        repository.getCurrentWeatherFromDB()
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({responseDB -> onResponseLoadCurrentWeather(responseDB)},{t -> onFailureLoadCurrentWeather(t)})
-    }
 
-    fun onResponseLoadCurrentWeather(response: CurrentWeatherEntity){
-        setCurrentData(response)
-        currentWeatherResponse = response
-        Log.d(TAG,"onLoad $response ")
-    }
-
-    fun onFailureLoadCurrentWeather(t: Throwable) {
-        Log.d(TAG,"Load exeption: $t")
-    }
 
     fun setCurrentData(response: CurrentWeatherEntity){
         Log.d(TAG,"Setting current data : $response")
@@ -67,6 +78,11 @@ class TodayPresenter @Inject constructor(
         }
     }
 
+    fun getLoadCurrentWeather(){
+        repository.getCurrentWeather()
+        repository.loadCurrentWeather()
+    }
+
     fun shareCurrentDataPresenter(response: CurrentWeatherEntity):Intent{
         val sendIntent: Intent = Intent().apply {
             action = Intent.ACTION_SEND
@@ -81,6 +97,14 @@ class TodayPresenter @Inject constructor(
             type = "text/plain"
         }
         return sendIntent
+    }
+
+    fun checkInternetConnection(){
+        if (!isConnected(appContext)){
+            view.showInternetConnectionAttention(true)
+        }
+        else view.showInternetConnectionAttention(false)
+
     }
 
     fun setWindOrintation(deg:Int):String {

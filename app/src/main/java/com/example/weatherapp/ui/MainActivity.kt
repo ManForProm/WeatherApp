@@ -1,5 +1,7 @@
 package com.example.weatherapp.ui
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.content.res.Configuration
 import android.graphics.drawable.AnimationDrawable
@@ -23,6 +25,8 @@ class MainActivity() : AppCompatActivity() {
 
     private var currentFragment: Int = 0
 
+    private var sharedPreferences: SharedPreferences? = null
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,6 +35,10 @@ class MainActivity() : AppCompatActivity() {
          val forecastFragment = ForecastFragment()
          val todayFragment = TodayFragment()
          val bottomNavigation : BottomNavigationView = findViewById(R.id.bottom_nav)
+
+
+        sharedPreferences = this?.getSharedPreferences("com.example.weatherapp",
+            Context.MODE_PRIVATE)
 
         ActivityResultContracts.RequestPermission()
 
@@ -85,7 +93,11 @@ class MainActivity() : AppCompatActivity() {
             if(grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED){
                 Log.d("Debug", "You have permission")
             }
-            else finish()
+            else {
+                sharedPreferences?.edit()?.putBoolean("first_run",true)?.apply()
+
+                finish()
+            }
         }
     }
     private fun makeCurrentFragment(fragment: Fragment){

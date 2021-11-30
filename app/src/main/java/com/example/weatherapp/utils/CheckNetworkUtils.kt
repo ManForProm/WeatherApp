@@ -8,8 +8,9 @@ import android.os.Build
 fun  isConnected(context: Context): Boolean {
 
     val hasInternet: Boolean
+    val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE)
+            as ConnectivityManager
 
-    val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
 
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
         val networkCapabilities = connectivityManager.activeNetwork ?: return false
@@ -32,4 +33,5 @@ fun  isConnected(context: Context): Boolean {
             false
         }
     }
-    return hasInternet}
+    return hasInternet
+}

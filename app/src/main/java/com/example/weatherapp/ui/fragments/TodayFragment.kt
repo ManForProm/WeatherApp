@@ -1,17 +1,24 @@
 package com.example.weatherapp.ui.fragments
 
+import android.content.Context
+import android.content.DialogInterface
 import android.content.Intent
+import android.content.SharedPreferences
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.example.weatherapp.R
 import com.example.weatherapp.databinding.FragmentTodayBinding
 import com.example.weatherapp.today.TodayContract
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
+
 
 @AndroidEntryPoint
 class TodayFragment @Inject constructor() : Fragment(),TodayContract.View {
@@ -20,57 +27,84 @@ class TodayFragment @Inject constructor() : Fragment(),TodayContract.View {
     lateinit var presenter: TodayContract.Presenter
     lateinit var binding: FragmentTodayBinding
 
-    private var text:String = ""
+    private var sharedPreferences:SharedPreferences? = null
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
+
         super.onCreate(savedInstanceState)
 
-    }
+        presenter.onViewAttach(this, getLifecycle())
 
+        sharedPreferences = context?.getSharedPreferences("com.example.weatherapp",
+            Context.MODE_PRIVATE)
+
+
+    }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
         binding = FragmentTodayBinding.inflate(layoutInflater)
 
         binding.shareButton.setOnClickListener {
             presenter.onClickShare()
         }
 
+        if(sharedPreferences?.getBoolean("first_run",true) == true){
+            presenter.onFirstLaunch()
+
+            sharedPreferences?.edit()?.putBoolean("first_run",false)?.apply()
+        }
+
         return binding.root
-    }
-
-    override fun onResume() {
-        super.onResume()
-
-        presenter.onResume()
-
-
     }
 
     override fun shareCurrentData(intent: Intent) {
             startActivity(intent)
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun showFirstLaunchInternetConnectionAttention(onErrorInternetConnection: Boolean) {
+        val alertDialogBuilder:MaterialAlertDialogBuilder
+        context?.let {
+            alertDialogBuilder = MaterialAlertDialogBuilder(it,R.style.ThemeOverlay_App_MaterialAlertDialog)
+            alertDialogBuilder.apply {
+                setTitle("Internet Connection Alert")
+                setIcon(R.drawable.ic_error)
+                setMessage("Internet connection is required for the first launch")
+                background = ColorDrawable(
+                    Color.parseColor("#FEFEFA")
+                )
+                setPositiveButton("Ok"){dialog,which ->
+                    sharedPreferences?.edit()?.putBoolean("first_run",true)?.apply()
+                    activity?.finish()
+                }
+                setOnKeyListener(DialogInterface.OnKeyListener { arg0, keyCode, event ->
+                    if (keyCode == KeyEvent.KEYCODE_BACK) {
+                        sharedPreferences?.edit()?.putBoolean("first_run",true)?.apply()
+                        activity?.finish()
+                    }
+                    true
+                })
 
-        presenter.onViewCreated()
+
+
+            }
+            val dialog = alertDialogBuilder.create()
+            dialog.setCanceledOnTouchOutside(false)
+            dialog.show()
+        }
 
 
 
 
-        binding.textToday = text
 
-        val tv: TextView = view.findViewById(R.id.fragment_today_location_text)
-        tv.setText(text)
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
+    override fun showInternetConnectionAttention(onErrorInternetConnection:Boolean) {
+        binding.visibility = onErrorInternetConnection
     }
-
 
     override fun showCurrentWeather( location: String,
                                      tempreture: String,
